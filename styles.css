@@ -59,6 +59,12 @@ a {
   align-items: center;
 }
 
+.brand a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .brand__mark {
   height: 44px;
   width: auto;
@@ -133,12 +139,30 @@ a {
   position: static;
 }
 
+.hero:has(.hero__image) {
+  padding-top: 40px;
+  justify-content: flex-start;
+}
+
 .hero h1 {
   font-size: clamp(60px, 10vw, 110px);
   line-height: 1.05;
   margin: 0 0 28px;
   font-weight: 600;
   color: #0d0d0d;
+}
+
+.hero__image {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  margin: -60px auto 28px;
+  display: block;
+}
+
+.hero:has(.hero__image) {
+  padding-top: 40px;
+  justify-content: flex-start;
 }
 
 .hero p {
