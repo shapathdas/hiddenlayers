@@ -38,6 +38,7 @@
         <button class="menu-btn" type="button" aria-label="Menu">
           <span></span>
           <span></span>
+          <span></span>
         </button>
       </div>
       <a class="quote" href="#">
@@ -58,7 +59,7 @@
 
       </h2>
       <a class="cta">
-        <span>2025 Frontier List (Coming Soon)</span>
+        <span>2025 Frontier List (Published)</span>
         <span class="cta__icon" aria-hidden="true">→</span>
       </a>
     </div>
@@ -76,9 +77,113 @@
         <p class="feature__text">We don’t want to miss any research you believe is truly groundbreaking — work that pushes the boundaries of what’s possible in AI.</p>
         <p class="feature__text">If your nomination is featured in the final Frontier List, you’ll have the opportunity to present your unique perspective to a diverse, high-impact audience.</p>
         <a class="feature__btn" href="#">
-          <span>Nominate A Research Paper</span>
+          <span>Nominate Closed for 2025</span>
           <span class="feature__btn-icon" aria-hidden="true">→</span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="committee">
+    <div class="committee__container">
+      <div class="committee__row">
+        <h3 class="committee__title">Chairs</h3>
+        <div class="committee__members">
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/dinesh-babu.jpg" alt="Prof. Dinesh Babu Jayagopi">
+            </div>
+            <div class="committee__name">Prof. Dinesh Babu Jayagopi</div>
+            <div class="committee__designation">HoD, Data Science and AI</div>
+            <div class="committee__company">IIIT-Bangalore</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/shapath-das.jpg" alt="Shapath Das">
+            </div>
+            <div class="committee__name">Shapath Das</div>
+            <div class="committee__designation">CEO / Co founder</div>
+            <div class="committee__company">Unsupervized Inc.</div>
+          </div>
+        </div>
+      </div>
+      <div class="committee__row">
+        <h3 class="committee__title">Selection Committee Members</h3>
+        <div class="committee__members">
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/ahammad-shibil.jpg" alt="Ahammad Shibil">
+            </div>
+            <div class="committee__name">Ahammad Shibil</div>
+            <div class="committee__designation">Deep Tech Investor</div>
+            <div class="committee__company">Speciale Invest</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/joseph-k-j.jpg" alt="Joseph K J">
+            </div>
+            <div class="committee__name">Joseph K J</div>
+            <div class="committee__designation">Research Scientist</div>
+            <div class="committee__company">Adobe Research</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/ranita-jana.jpeg" alt="Ranita Jana">
+            </div>
+            <div class="committee__name">Ranita Jana</div>
+            <div class="committee__designation">Chief Technology Officer</div>
+            <div class="committee__company">Co founder, Unsupervized Inc.</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/raghuram-bharadwaj.png" alt="Raghuram Bharadwaj">
+            </div>
+            <div class="committee__name">Raghuram Bharadwaj</div>
+            <div class="committee__designation">Assistant Professor</div>
+            <div class="committee__company">IIIT-Bangalore</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/sumeet-agarwal.jpg" alt="Sumeet Agarwal">
+            </div>
+            <div class="committee__name">Sumeet Agarwal</div>
+            <div class="committee__designation">Associate Professor</div>
+            <div class="committee__company">School of AI, IIT-Delhi</div>
+          </div>
+        </div>
+      </div>
+      <div class="committee__row">
+        <h3 class="committee__title">Organising Committee</h3>
+        <div class="committee__members">
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/laxmi-narayen.jpg" alt="Laxmi Narayen Nagarajan Venkatesan">
+            </div>
+            <div class="committee__name">Laxmi Narayen N V</div>
+            <div class="committee__company">IIIT Bangalore</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/namrata-rajagopal.jpeg" alt="Namrata Rajagopal">
+            </div>
+            <div class="committee__name">Namrata Rajagopal</div>
+            <div class="committee__company">Exception Raised</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/sai-madhavan-g.jpeg" alt="Sai Madhavan G">
+            </div>
+            <div class="committee__name">Sai Madhavan G</div>
+            <div class="committee__company">IIIT Bangalore</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="frontier/memberPhotos/subhajeet-lahiri.jpeg" alt="Subhajeet Lahiri">
+            </div>
+            <div class="committee__name">Subhajeet Lahiri</div>
+            <div class="committee__company">IIIT Bangalore</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -136,6 +241,28 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuBtn = document.querySelector('.menu-btn');
+      const links = document.querySelector('.links');
+      
+      if (menuBtn && links) {
+        menuBtn.addEventListener('click', function() {
+          menuBtn.classList.toggle('active');
+          links.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!menuBtn.contains(event.target) && !links.contains(event.target)) {
+            menuBtn.classList.remove('active');
+            links.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
 

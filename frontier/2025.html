@@ -37,7 +37,7 @@
 
     .papers-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 32px;
       margin-bottom: 60px;
     }
@@ -56,6 +56,40 @@
       object-fit: cover;
       background: #f5f5f5;
       display: block;
+    }
+
+    .paper-pdf {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      border: none;
+      background: #f5f5f5;
+      display: block;
+    }
+
+    .paper-pdf-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .paper-pdf-link {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      text-decoration: none;
+      z-index: 10;
+      transition: background 0.2s;
+    }
+
+    .paper-pdf-link:hover {
+      background: rgba(0, 0, 0, 0.9);
     }
 
     .paper-info {
@@ -95,6 +129,13 @@
       margin: 0 0 8px;
     }
 
+    .paper-description {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #666;
+      margin: 8px 0 12px;
+    }
+
     .paper-meta {
       display: flex;
       justify-content: space-between;
@@ -115,11 +156,45 @@
       color: #d32f2f;
     }
 
+    @media (max-width: 1200px) {
+      .papers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+
     @media (max-width: 768px) {
       .papers-grid {
         grid-template-columns: 1fr;
         gap: 24px;
       }
+    }
+
+    .papers-grid-hidden {
+      display: none;
+    }
+
+    .papers-toggle-btn {
+      display: block;
+      margin: 40px auto 0;
+      padding: 14px 28px;
+      background: var(--white);
+      border: 2px solid #0d0d0d;
+      border-radius: 24px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #0d0d0d;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      justify-self: center;
+      grid-column: 1 / -1;
+    }
+
+    .papers-toggle-btn:hover {
+      background: #f5f5f5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
@@ -140,6 +215,7 @@
         <button class="menu-btn" type="button" aria-label="Menu">
           <span></span>
           <span></span>
+          <span></span>
         </button>
       </div>
       <a class="quote" href="#">
@@ -155,17 +231,23 @@
       <div class="papers-grid">
         <!-- Paper 1 -->
         <div class="paper-card">
-          <img src="../Web_FRLST.png" alt="Paper preview" class="paper-poster">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2501.12948v1.pdf" type="application/pdf" title="DeepSeek-R1 Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2501.12948v1.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2501.12948v1.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
           <div class="paper-info">
             <div class="paper-header">
               <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
               </svg>
-              <h2 class="paper-title">Example Paper Title: Advancing AI Through Novel Architectures</h2>
+              <h2 class="paper-title">DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning</h2>
             </div>
-            <p class="paper-details">By Author Name, Co-Author Name</p>
+            <p class="paper-details">DeepSeek-AI</p>
+            <p class="paper-description">DeepSeek-R1 demonstrates that complex reasoning (reflection/exploration) can emerge through pure Reinforcement Learning without massive supervised datasets. It utilizes Group Relative Policy Optimization (GRPO), a high-efficiency algorithm that eliminates the need for a separate critic model by calculating advantages via relative group performance, significantly reducing training costs. This architecture has set a new benchmark for scalable reasoning models, inspiring widespread replication across specialized domains like math and vision.</p>
             <div class="paper-meta">
-              <span class="paper-institution">Institution Name</span>
+              <span class="paper-institution">Published in Nature</span>
               <span class="paper-year">2025</span>
             </div>
           </div>
@@ -173,17 +255,23 @@
 
         <!-- Paper 2 -->
         <div class="paper-card">
-          <img src="../Web_FRLST.png" alt="Paper preview" class="paper-poster">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://transformer-circuits.pub/2025/attribution-graphs/biology.html" type="text/html" title="On the Biology of a Large Language Model">
+              <p>Your browser does not support iframes. <a href="https://www.anthropic.com/research/on-the-biology-of-a-large-language-model" target="_blank">View the report</a> instead.</p>
+            </iframe>
+            <a href="https://www.anthropic.com/research/on-the-biology-of-a-large-language-model" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open Report</a>
+          </div>
           <div class="paper-info">
             <div class="paper-header">
               <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
               </svg>
-              <h2 class="paper-title">Another Frontier Research: Multimodal Learning Breakthrough</h2>
+              <h2 class="paper-title">On the Biology of a Large Language Model</h2>
             </div>
-            <p class="paper-details">By Researcher Name, Collaborator Name</p>
+            <p class="paper-details">Lindsey, Gurney et. al.</p>
+            <p class="paper-description">This paper advances mechanistic interpretability by moving beyond "black-box" analysis to map the internal computational circuits of Claude 3.5 Haiku. By employing attribution graphs and circuit-tracing, the researchers provide causal insights into how specific neural representations drive reasoning behaviors. This framework—drawing from neuroscience and computational biology—offers a rigorous method for validating model safety, ensuring transparency, and meeting emerging regulatory compliance standards for enterprise AI.</p>
             <div class="paper-meta">
-              <span class="paper-institution">University, Research Lab</span>
+              <span class="paper-institution">Report by Anthropic</span>
               <span class="paper-year">2025</span>
             </div>
           </div>
@@ -191,19 +279,421 @@
 
         <!-- Paper 3 -->
         <div class="paper-card">
-          <img src="../Web_FRLST.png" alt="Paper preview" class="paper-poster">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2501.00663.pdf" type="application/pdf" title="Titans: Learning to Memorize at Test Time Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2501.00663.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2501.00663.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
           <div class="paper-info">
             <div class="paper-header">
               <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
               </svg>
-              <h2 class="paper-title">Revolutionary Approach to Neural Networks</h2>
+              <h2 class="paper-title">Titans: Learning to Memorize at Test Time</h2>
             </div>
-            <p class="paper-details">By Lead Author, Team Member</p>
+            <p class="paper-details">Ali Behrouz, Peilin Zhong, Vahab Mirrokni</p>
+            <p class="paper-description">This work proposes a unique approach of thinking about memory as an explicit test-time learner of associations between keys and values. It offers an elegant general solution to the majority of sequence tasks by delegating some computation and training to the test time, making a model to learn more general patterns during training. This NeurIPS paper is thought of as a worthy successor of the transformer architecture. The results are very promising.</p>
             <div class="paper-meta">
-              <span class="paper-institution">Tech Company, Academic Institution</span>
+              <span class="paper-institution">NeurIPS 2025</span>
               <span class="paper-year">2025</span>
             </div>
+          </div>
+        </div>
+
+        <!-- Paper 4 -->
+        <div class="paper-card">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2503.11651.pdf" type="application/pdf" title="VGGT: Visual Geometry Grounded Transformer Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2503.11651.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2503.11651.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">VGGT: Visual Geometry Grounded Transformer</h2>
+            </div>
+            <p class="paper-details">Jianyuan Wang, Minghao Chen, Nikita Karaev, Andrea Vedaldi, Christian Rupprecht, David Novotny</p>
+            <p class="paper-description">Visual Geometry Grounded Transformer (VGGT) is a feed-forward neural network that can directly estimate all key 3D scene properties for hundreds of input views. It achieves state-of-the-art results in multiple 3D tasks, including camera parameter estimation, Multiview depth estimation, dense point cloud reconstruction, and 3D point tracking. This is a strong 3D vision foundational model contribution.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">CVPR 2025</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 5 -->
+        <div class="paper-card">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2505.17638.pdf" type="application/pdf" title="Why Diffusion Models Don't Memorize Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2505.17638.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2505.17638.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">Why Diffusion Models Don't Memorize: Implicit Dynamical Regularization</h2>
+            </div>
+            <p class="paper-details">Tony Bonnaire, Raphaël Urfin, Giulio Biroli, Marc Mézard</p>
+            <p class="paper-description">Diffusion models have achieved remarkable success across a wide range of generative tasks. A key challenge is understanding the mechanisms that prevent their memorization of training data and allow generalization. In this work, the authors investigate the role of the training dynamics in the transition from generalization to memorization, explaining why Early stopping has a strong theoretically basis.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">NeurIPS 2025</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 6 -->
+        <div class="paper-card">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2504.16054.pdf" type="application/pdf" title="π0.5: a Vision-Language-Action Model with Open-World Generalization Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2504.16054.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2504.16054.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">π0.5 : a Vision-Language-Action Model with Open-World Generalization</h2>
+            </div>
+            <p class="paper-details">Kevin Black, Noah Brown, James Darpinian, Karan Dhabalia, Danny Driess, Adnan Esmail, Michael Equi, Chelsea Finn, Niccolo Fusai, Manuel Y. Galliker, Dibya Ghosh, Lachy Groom, Karol Hausman, Brian Ichter, Szymon Jakubczak, Tim Jones, Liyiming Ke, Devin LeBlanc, Sergey Levine, Adrian Li-Bell, Mohith Mothukuri, Suraj Nair, Karl Pertsch, Allen Z. Ren, Lucy Xiaoyang Shi, Laura Smith, Jost Tobias Springenberg, Kyle Stachowicz, James Tanner, Quan Vuong, Homer Walke, Anna Walling, Haohuan Wang, Lili Yu, Ury Zhilinsky</p>
+            <p class="paper-description">The paper provides strong empirical evidence that heterogeneous co-training, mixing real robot demonstrations with complementary multimodal supervision (e.g., semantic subtask prediction, detections, and web-derived vision-language signals), can produce a VLA policy that generalizes in open-world settings rather than only in curated lab scenarios. The central scientific contribution isn't a flashy new module, but a training/data thesis: by unifying "what the task means" (language + semantics) with "how to execute" (low-level action chunks) inside one model, the approach bridges the semantics–control gap that has historically limited end-to-end VLAs.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">CoRL 2025</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 7 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2505.11831.pdf" type="application/pdf" title="ARC-AGI-2: A New Challenge for Frontier AI Reasoning Systems Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2505.11831.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2505.11831.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">ARC-AGI-2: A New Challenge for Frontier AI Reasoning Systems</h2>
+            </div>
+            <p class="paper-details">Francois Chollet, Mike Knoop, Gregory Kamradt, Bryan Landers, Henry Pinkard</p>
+            <p class="paper-description">ARC-AGI-2 is a genuinely valuable benchmark refresh because it fixes the two things that quietly make many "reasoning" leaderboards scientifically messy: comparability of splits and leakage/implicit tuning over time. The authors don't just assert "humans can do it", they run controlled human testing at scale (hundreds of participants, thousands of attempts) and then calibrate the public / semi-private / private subsets to essentially the same human difficulty (≤1pp mean difference), which makes progress interpretable rather than a split-selection artifact. On the model side, the initial reported baseline performance is extremely low (near-noise percentages on the semi-private set at release time), supporting the core claim that this benchmark sits in a real "human-easy / AI-hard" regime and exposes a meaningful frontier gap.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">Benchmark Dataset by ARC Prize</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 8 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://www.biorxiv.org/content/10.1101/2024.07.01.600583v1.full.pdf" type="application/pdf" title="Simulating 500 million years of evolution with a language model PDF">
+              <p>Your browser does not support iframes. <a href="https://www.biorxiv.org/content/10.1101/2024.07.01.600583v1.full.pdf" target="_blank">View the paper</a> instead.</p>
+            </iframe>
+            <a href="https://www.biorxiv.org/content/10.1101/2024.07.01.600583v1.full.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">Simulating 500 million years of evolution with a language model</h2>
+            </div>
+            <p class="paper-details">Thomas Hayes, Roshan Rao, Halil Akin, Nicholas J. Sofroniew, Deniz Oktay, Zeming Lin, Robert Verkuil, Vincent Q. Tran, Jonathan Deaton, Marius Wiggert, Rohil Badkundri, Irhum Shafkat, Jun Gong, Alexander Derry, Raul S. Molina, Neil Thomas, Yousuf A. Khan, Chetan Mishra, Carolyn Kim, Liam J. Bartie, Matthew Nemeth, Patrick D. Hsu, Tom Sercu, Salvatore Candido, Alexander Rives</p>
+            <p class="paper-description">This paper shows that language-model training can act as a scalable simulator of biological evolution, capturing long-term constraints and adaptations over hundreds of millions of years—something infeasible with classical evolutionary simulations.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">Science AAAS 2025</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 9 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <img
+              src="https://pbs.twimg.com/media/GgViiodasAAsGTI?format=jpg&name=medium"
+              alt="A DNA language model based on multispecies alignment predicts the effects of genome-wide variants"
+              class="paper-poster"
+            >
+            <a href="https://www.nature.com/articles/s41587-024-02511-w" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open Paper</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">A DNA language model based on multispecies alignment predicts the effects of genome-wide variants</h2>
+            </div>
+            <p class="paper-details">Gonzalo Benegas, Carlos Albors, Alan J. Aw, Chengzhong Ye, Yun S. Song</p>
+            <p class="paper-description">It's important because it shows that aligning genomes across many species (MSA) can be used like "context" for a DNA language model, letting the model predict variant effects genome-wide much better, directly supporting prioritizing disease variants and interpreting noncoding DNA at scale.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">Nature 2025</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 10 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2505.06708.pdf" type="application/pdf" title="Gated Attention for Large Language Models Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2505.06708.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2505.06708.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">Gated Attention for Large Language Models</h2>
+            </div>
+            <p class="paper-details">Z. Qiu, Z. Wang, B. Zheng, et al.</p>
+            <p class="paper-description">The paper shows how a simple change to the sigmoid activation function (conceived via systematic empirical evaluation) can lead to improved training stability, long-context extrapolation, and add input-dependent sparsity into LLMs. A simple but impactful paper.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">NeurIPS 2025 Best Paper</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 11 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2502.06768.pdf" type="application/pdf" title="Train for the Worst, Plan for the Best: Masked Diffusion Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2502.06768.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2502.06768.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">"Train for the Worst, Plan for the Best": Masked Diffusion</h2>
+            </div>
+            <p class="paper-details">J. Kim, K. Shah, V. Kontonis, et al.</p>
+            <p class="paper-description">Masked diffusion models are upcoming and indeed offer significant advantages over autoregressive models. This paper introduces adaptive strategies to select the correct token generation order during inference, which helps further improve MDMs. This paper could have a strong impact on discrete generative models.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">ICML 2025 Outstanding Paper</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 12 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2412.12063.pdf" type="application/pdf" title="Revelations: A Decidable Class of POMDPs Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2412.12063.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2412.12063.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">Revelations: A Decidable Class of POMDPs</h2>
+            </div>
+            <p class="paper-details">M. Belly, N. Fijalkow, et al.</p>
+            <p class="paper-description">Identified decidable POMDP classes ("revealing"); enables exact verification of AI planning under uncertainty.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">AAAI 2025 Outstanding Paper</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 13 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2505.03335.pdf" type="application/pdf" title="Absolute Zero: Reinforced Self-Play Reasoning Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2505.03335.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2505.03335.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">Absolute Zero: Reinforced Self-Play Reasoning</h2>
+            </div>
+            <p class="paper-details">A. Zhao, Y. Wu, Y. Yue, et al.</p>
+            <p class="paper-description">LLM generates/solves own tasks with code verification; SOTA reasoning with zero human data.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">NeurIPS 2025 Spotlight</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 14 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2510.22954.pdf" type="application/pdf" title="Artificial Hivemind: Homogenization of LM Outputs Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2510.22954.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2510.22954.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">Artificial Hivemind: Homogenization of LM Outputs</h2>
+            </div>
+            <p class="paper-details">L. Jiang, Y. Chai, M. Li, et al.</p>
+            <p class="paper-description">The paper creates an interesting and important data set to be able to characterise better the open-endedness or creativity of human capacities such as metaphor use. Careful analysis of AI performance on such data sets can help to better understand their successes and limitations.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">NeurIPS 2025 Best Paper (D&B)</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 15 -->
+        <div class="paper-card papers-grid-hidden">
+          <div class="paper-pdf-container">
+            <iframe class="paper-pdf" src="https://arxiv.org/pdf/2505.10554.pdf" type="application/pdf" title="Beyond Aha: Systematic Meta-Abilities Alignment Paper PDF">
+              <p>Your browser does not support PDFs. <a href="https://arxiv.org/pdf/2505.10554.pdf" target="_blank">Download the PDF</a> instead.</p>
+            </iframe>
+            <a href="https://arxiv.org/pdf/2505.10554.pdf" target="_blank" rel="noopener noreferrer" class="paper-pdf-link">Open PDF</a>
+          </div>
+          <div class="paper-info">
+            <div class="paper-header">
+              <svg class="paper-trophy" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+              </svg>
+              <h2 class="paper-title">Beyond "Aha!": Systematic Meta-Abilities Alignment</h2>
+            </div>
+            <p class="paper-details">Z. Hu, Y. Wang, H. Dong, et al.</p>
+            <p class="paper-description">The paper takes an interesting approach to explicitly aligning and assessing LRMs for basic building blocks of logical inference (deduction, induction, abduction). Understanding AI 'reasoning' in terms of these foundational capacities will probably be an important goal in assessing their utility/reliability for a variety of real-world tasks and scenarios.</p>
+            <div class="paper-meta">
+              <span class="paper-institution">ICLR 2025</span>
+              <span class="paper-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="papers-toggle-btn" type="button" id="showAllPapersBtn">Show all 15 papers</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="committee">
+    <div class="committee__container">
+      <div class="committee__row">
+        <h3 class="committee__title">2025 Chairs</h3>
+        <div class="committee__members">
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/dinesh-babu.jpg" alt="Prof. Dinesh Babu Jayagopi">
+            </div>
+            <div class="committee__name">Prof. Dinesh Babu Jayagopi</div>
+            <div class="committee__designation">HoD, Data Science and AI</div>
+            <div class="committee__company">IIIT-Bangalore</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/shapath-das.jpg" alt="Shapath Das">
+            </div>
+            <div class="committee__name">Shapath Das</div>
+            <div class="committee__designation">CEO / Co founder</div>
+            <div class="committee__company">Unsupervized Inc.</div>
+          </div>
+        </div>
+      </div>
+      <div class="committee__row">
+        <h3 class="committee__title">2025 Selection Committee Members</h3>
+        <div class="committee__members">
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/ahammad-shibil.jpg" alt="Ahammad Shibil">
+            </div>
+            <div class="committee__name">Ahammad Shibil</div>
+            <div class="committee__designation">Deep Tech Investor</div>
+            <div class="committee__company">Speciale Invest</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/joseph-k-j.jpg" alt="Joseph K J">
+            </div>
+            <div class="committee__name">Joseph K J</div>
+            <div class="committee__designation">Research Scientist</div>
+            <div class="committee__company">Adobe Research</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/ranita-jana.jpeg" alt="Ranita Jana">
+            </div>
+            <div class="committee__name">Ranita Jana</div>
+            <div class="committee__designation">Chief Technology Officer</div>
+            <div class="committee__company">Co founder, Unsupervized Inc.</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/raghuram-bharadwaj.png" alt="Raghuram Bharadwaj">
+            </div>
+            <div class="committee__name">Raghuram Bharadwaj</div>
+            <div class="committee__designation">Assistant Professor</div>
+            <div class="committee__company">IIIT-Bangalore</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/sumeet-agarwal.jpg" alt="Sumeet Agarwal">
+            </div>
+            <div class="committee__name">Sumeet Agarwal</div>
+            <div class="committee__designation">Associate Professor</div>
+            <div class="committee__company">School of AI, IIT-Delhi</div>
+          </div>
+        </div>
+      </div>
+      <div class="committee__row">
+        <h3 class="committee__title">2025 Organising Committee</h3>
+        <div class="committee__members">
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/laxmi-narayen.jpg" alt="Laxmi Narayen Nagarajan Venkatesan">
+            </div>
+            <div class="committee__name">Laxmi Narayen N V</div>
+            <div class="committee__company">IIIT Bangalore</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/namrata-rajagopal.jpeg" alt="Namrata Rajagopal">
+            </div>
+            <div class="committee__name">Namrata Rajagopal</div>
+            <div class="committee__company">Exception Raised</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/sai-madhavan-g.jpeg" alt="Sai Madhavan G">
+            </div>
+            <div class="committee__name">Sai Madhavan G</div>
+            <div class="committee__company">IIIT Bangalore</div>
+          </div>
+          <div class="committee__member">
+            <div class="committee__photo">
+              <img src="memberPhotos/subhajeet-lahiri.jpeg" alt="Subhajeet Lahiri">
+            </div>
+            <div class="committee__name">Subhajeet Lahiri</div>
+            <div class="committee__company">IIIT Bangalore</div>
           </div>
         </div>
       </div>
@@ -245,6 +735,47 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuBtn = document.querySelector('.menu-btn');
+      const links = document.querySelector('.links');
+      
+      if (menuBtn && links) {
+        menuBtn.addEventListener('click', function() {
+          menuBtn.classList.toggle('active');
+          links.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!menuBtn.contains(event.target) && !links.contains(event.target)) {
+            menuBtn.classList.remove('active');
+            links.classList.remove('active');
+          }
+        });
+      }
+
+      // Toggle papers visibility
+      const showAllBtn = document.getElementById('showAllPapersBtn');
+      const hiddenPapers = document.querySelectorAll('.papers-grid-hidden');
+      
+      if (showAllBtn && hiddenPapers.length > 0) {
+        showAllBtn.addEventListener('click', function() {
+          hiddenPapers.forEach(function(paper) {
+            paper.classList.toggle('papers-grid-hidden');
+          });
+          
+          // Update button text
+          if (hiddenPapers[0].classList.contains('papers-grid-hidden')) {
+            showAllBtn.textContent = 'Show all 15 papers';
+          } else {
+            showAllBtn.textContent = 'Hide papers';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
 

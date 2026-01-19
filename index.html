@@ -38,6 +38,7 @@
         <button class="menu-btn" type="button" aria-label="Menu">
           <span></span>
           <span></span>
+          <span></span>
         </button>
       </div>
       <a class="quote" href="#">
@@ -133,6 +134,28 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuBtn = document.querySelector('.menu-btn');
+      const links = document.querySelector('.links');
+      
+      if (menuBtn && links) {
+        menuBtn.addEventListener('click', function() {
+          menuBtn.classList.toggle('active');
+          links.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!menuBtn.contains(event.target) && !links.contains(event.target)) {
+            menuBtn.classList.remove('active');
+            links.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
 

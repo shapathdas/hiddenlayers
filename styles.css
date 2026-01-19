@@ -91,19 +91,36 @@ a {
   height: 46px;
   border: none;
   border-radius: 50%;
-  background: #8ccf66;
-  display: inline-flex;
+  background: var(--white);
+  display: none;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 5px;
   cursor: pointer;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .menu-btn span {
   display: block;
-  width: 16px;
+  width: 20px;
   height: 2px;
   background: #1e1e1e;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
 }
 
 .quote {
@@ -381,6 +398,136 @@ a {
   overflow: hidden;
 }
 
+.committee {
+  background: var(--white);
+  padding: 80px 24px;
+}
+
+.committee__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.committee__row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.committee__title {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  color: #0d0d0d;
+  margin: 0;
+}
+
+.committee__members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 32px;
+  justify-items: center;
+}
+
+.committee__row:first-child .committee__members {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.committee__row:nth-child(2) .committee__members {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.committee__row:nth-child(3) .committee__members {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.committee__member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.committee__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  border: 2px dashed #d0d0d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.committee__photo:not(:has(img))::after {
+  content: "Photo";
+  font-size: 12px;
+  color: #999;
+  font-weight: 500;
+}
+
+.committee__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.committee__photo:has(img) {
+  border: none;
+  background: transparent;
+}
+
+.committee__name {
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0d0d0d;
+  text-align: center;
+}
+
+.committee__designation {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.committee__company {
+  margin-top: 2px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .committee__members {
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  }
+
+  .committee__row:first-child .committee__members {
+    grid-template-columns: repeat(2, 1fr) !important;
+    max-width: 100%;
+  }
+
+  .committee__row:nth-child(2) .committee__members,
+  .committee__row:nth-child(3) .committee__members {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .committee__photo {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 .footer {
   background: var(--white);
   padding: 60px 24px;
@@ -482,6 +629,48 @@ a {
   }
 }
 
+@media (max-width: 768px) {
+  .menu-btn {
+    display: flex;
+  }
+
+  .quote {
+    display: none;
+  }
+
+  .links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    flex-direction: column;
+    padding: 20px 24px;
+    gap: 16px;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+  }
+
+  .nav__bar {
+    position: relative;
+  }
+
+  .links.active {
+    display: flex;
+  }
+
+  .link {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .link:last-child {
+    border-bottom: none;
+  }
+}
+
 @media (max-width: 720px) {
   .nav__inner {
     flex-direction: column;
@@ -490,10 +679,6 @@ a {
 
   .quote {
     justify-content: center;
-  }
-
-  .links {
-    gap: 16px;
   }
 
   .feature__container {
